@@ -1,5 +1,7 @@
 import * as jwt from "jsonwebtoken"
 import { ITokenPayload } from "../interfaces/jwt.interface"
+import * as dotenv from "dotenv"
+dotenv.config()
 
 const jwt_secret = process.env.JWT_SECRET || ""
 const expiry_time = "9h"

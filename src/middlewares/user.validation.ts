@@ -1,10 +1,6 @@
 // import {  validationR } from 'express-validator';
 import { body } from "express-validator"
 
-const passwordRegex = new RegExp(
-  "^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$"
-)
-
 export const userSignupRules = [
   body("username")
     .trim()
@@ -29,8 +25,17 @@ export const userSignupRules = [
     .trim()
     .notEmpty()
     .withMessage("Password is required.")
-    .matches(passwordRegex)
+    .matches(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$/)
     .withMessage(
       "Password must have atleast 1 capital letter 1 number and 1 special symbol and must be atleast 8 characters long."
     ),
+]
+
+export const userLoginRules = [
+  body("usernameOrEmail")
+    .trim()
+    .notEmpty()
+    .withMessage("Usename or Email is required."),
+
+  body("password").trim().notEmpty().withMessage("Password is required."),
 ]

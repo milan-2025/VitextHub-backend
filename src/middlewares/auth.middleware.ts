@@ -21,7 +21,7 @@ export const authenticateToken = (
   const token = authHeader?.split(" ")[1]
 
   if (!token) {
-    return res.status(400).json({ error: "No token provided." })
+    return res.status(400).json({ errors: { error: "No token provided." } })
   }
 
   try {
@@ -29,6 +29,6 @@ export const authenticateToken = (
     req.user = decoded
     next()
   } catch (e) {
-    return res.status(401).json({ error: "Invalid token." })
+    return res.status(401).json({ errors: { error: "Invalid token." } })
   }
 }
